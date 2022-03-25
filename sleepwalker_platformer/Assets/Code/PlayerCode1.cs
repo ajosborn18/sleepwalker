@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCode1 : MonoBehaviour
 {
     Rigidbody2D _rigidbody;
-    // Animator _animator;
+    Animator _animator;
 
     public float speed = 40.0f;
     public float jump_force = 1500.0f;
@@ -25,13 +25,13 @@ public class PlayerCode1 : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        // _animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         grounded = Physics2D.OverlapCircle(feet_trans.position, ground_check_dist, ground_layer);
-        //_animator.SetBool("Grounded", grounded);
+        _animator.SetBool("Grounded", grounded);
         if(isAlive && transform.position.y < -20)
         {
             isAlive = false;
@@ -44,7 +44,7 @@ public class PlayerCode1 : MonoBehaviour
     {
         float xSpeed = Input.GetAxis("Horizontal") * speed;
         _rigidbody.velocity = new Vector2(xSpeed, _rigidbody.velocity.y);
-        //_animator.SetFloat("Speed", Mathf.Abs(xSpeed));
+        _animator.SetFloat("Speed", Mathf.Abs(xSpeed));
 
         if(grounded && Input.GetButtonDown("Jump"))
         {
